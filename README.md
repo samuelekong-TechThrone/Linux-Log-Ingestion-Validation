@@ -11,7 +11,7 @@ This repository documents the **end-to-end validation of a Linux log ingestion p
 The objective of this project is to ensure that Linux system logs:
 
 - Are securely forwarded to Splunk Enterprise
-- Land in the designated custom index (`mini_apex`)
+- Land in the designated custom index (`techthrone_ubuntu`)
 - Retain accurate timestamps
 - Correctly attribute the originating host
 - Are fully searchable for detection and incident response use cases
@@ -32,4 +32,4 @@ linux-log-ingestion-validation/
 │   └─ images/
 │        ├─ architecture_diagram.png
 │        └─ validation_screenshot.png
-└─ .gitignore
+
