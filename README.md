@@ -20,16 +20,5 @@ This repository provides both **high-level documentation** and detailed **techni
 
 ---
 
-## Repository Structure
 
-```text
-linux-log-ingestion-validation/
-│
-├─ README.md                  # Overview and links to docs
-├─ docs/
-│   ├─ project_report.md      # Detailed technical report
-│   ├─ screenshots.md         # Screenshot gallery
-│   └─ images/
-│        ├─ architecture_diagram.png
-│        └─ validation_screenshot.png
 
