@@ -9,7 +9,7 @@ This document provides a detailed record of the **Linux log ingestion pipeline v
 ## 1. Objective
 
 <details>
-<summary>Click to expand</summary>
+<summary>Click to expand details</summary>
 
 Validate that Linux logs from monitored endpoints:
 
@@ -26,7 +26,7 @@ Validate that Linux logs from monitored endpoints:
 ## 2. Environment Overview
 
 <details>
-<summary>Click to expand</summary>
+<summary>Click to expand details</summary>
 
 | Component | OS / Version | Role |
 |-----------|-------------|------|
@@ -45,78 +45,89 @@ Validate that Linux logs from monitored endpoints:
 ## 3. Validation Approach
 
 <details>
-<summary>Click to expand</summary>
+<summary>Click to expand details</summary>
 
 1. Generate a controlled test log:
 
 ```text
 "THIS IS JUST A TEST LOG"
+```
 
-2. Trace end-to-end ingestion from the Linux Endpoint → Universal Forwarder → Splunk Indexer → Custom Index (`techthrone_ubuntu`).
+2. Trace end-to-end ingestion from: the Linux Endpoint → Universal Forwarder → Splunk Indexer → Custom Index (techthrone_ubuntu).
 
 3. Validate the following criteria:
 
 - **Log Ingestion:** The test log appears in Splunk without delay.
-- **Index Segregation:** Event is stored in the designated `techthrone_ubuntu` index only.
-- **Host Attribution:** The `host` field correctly reflects the originating Linux system.
-- **Timestamp Integrity:** `_time` and `_indextime` match the system timestamp.
+
+- **Index Segregation:** Event is stored in the designated techthrone_ubuntu index only.
+
+- **Host Attribution:** The host field correctly reflects the originating Linux system.
+
+- **Timestamp Integrity:** _time and _indextime match the system timestamp.
+
 - **Event Searchability:** Test log is searchable using index, host, keyword, and time filters.
+
+</details>
+
+---
 
 ## 4. Validation Results
 
-<details>
-<summary>Click to expand</summary>
+<details> <summary>Click to expand</summary>
 
-| Validation Control        | Result |
-|---------------------------|--------|
-| Log Ingestion             | PASS   |
-| Index Segregation         | PASS   |
-| Host Attribution          | PASS   |
-| Timestamp Integrity       | PASS   |
-| Searchability             | PASS   |
+| Validation Control  | Result |
+| ------------------- | ------ |
+| Log Ingestion       | PASS   |
+| Index Segregation   | PASS   |
+| Host Attribution    | PASS   |
+| Timestamp Integrity | PASS   |
+| Searchability       | PASS   |
 
-**Observation:** No ingestion failures or parsing errors were detected. Residual risk is assessed as low.
-
-</details>
-
-## Recommendations
-
-<details>
-<summary>Click to expand</summary>
-
-### Security Hardening
-- Enable **SSL/TLS** for forwarder traffic  
-- Restrict **TCP port 9997** to authorized IP addresses only  
-- Enforce **strong authentication** between forwarder and indexer
-
-### Operational Monitoring
-- Implement **forwarder health monitoring**  
-- Configure **ingestion monitoring alerts**  
-- Establish alerts for **ingestion delays or anomalies**
-
-### Time Governance
-- Ensure **NTP synchronization** across all production endpoints  
-- Periodically validate **timestamp consistency** between host and index
-
-### Index Governance
-- Document and approve **index retention policies**  
-- Confirm alignment with **internal log management standards**
+Observation:
+No ingestion failures or parsing errors were detected. Residual risk is assessed as low.
 
 </details>
 
-## Key Takeaways
+---
 
-<details>
-<summary>Click to expand</summary>
+## 5. Recommendations
 
-- A SIEM is **not production-ready** until logs are validated for:  
-  - Data integrity  
-  - Host attribution  
-  - Timestamp alignment  
-  - Searchability
+<details> <summary>Click to expand</summary>
+  
+**Security Hardening**
+- Enable SSL/TLS for forwarder traffic
+- Restrict TCP port 9997 to authorized IP addresses only
+- Enforce strong authentication between forwarder and indexer
 
-- Controlled lab validation **reduces operational risk** before production onboarding  
-- Architecture diagrams and validation evidence provide a **reference for future deployments**
+**Operational Monitoring**
+- Implement forwarder health monitoring
+- Configure ingestion monitoring alerts
+- Establish alerts for ingestion delays or anomalies
+
+**Time Governance**
+- Ensure NTP synchronization across all production endpoints
+- Periodically validate timestamp consistency between host and index
+
+**Index Governance**
+- Document and approve index retention policies
+- Confirm alignment with internal log management standards
 
 </details>
 
+---
+
+## 6. Key Takeaways
+
+<details> <summary>Click to expand</summary>
+
+A SIEM is not production-ready until logs are validated for:
+- Data integrity
+- Host attribution
+- Timestamp alignment
+- Searchability
+
+*Note:* 
+- Controlled lab validation reduces operational risk before production onboarding
+- Architecture diagrams and validation evidence provide a reference for future deployments
+
+</details> 
